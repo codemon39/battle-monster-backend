@@ -1,22 +1,23 @@
-const express = require("express");
+import express from "express";
+import animals from "../../monsters.json" assert { type: "json" };
 const router = express.Router();
-const animals = require("../../monsters.json");
 
 router.get("/test", (req, res) => res.json(animals.monsters));
 
 router.post("/gameStart", (req, res) => {
   const data = req.body.data;
-  console.log(data);
 
   const monster1 = animals.monsters.find(
-    (monster) => monster.id == data.playerid
+    (monster) => monster.id == data.playerId
   );
+
   const monster2 = animals.monsters.find(
-    (monster) => monster.id == data.computerid
+    (monster) => monster.id == data.computerId
   );
 
   const monster1Sum =
     monster1.defense + monster1.hp + monster1.speed + monster1.attack;
+
   const monster2Sum =
     monster2.defense + monster2.hp + monster2.speed + monster2.attack;
 
@@ -33,8 +34,9 @@ router.post("/gameStart", (req, res) => {
 
 router.post("/result", (req, res) => {
   const id = req.body.id;
+  console.log(id);
   const monster = animals.monsters.find((monster) => monster.id === id);
   res.json(monster);
 });
 
-module.exports = router;
+export default router;
