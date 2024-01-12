@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
+import animals from "../../monsters.json" assert { type: "json" };
 const router = express.Router();
-const animals = require("../../monsters.json");
 
 router.get("/test", (req, res) => res.json(animals.monsters));
 
@@ -39,4 +39,4 @@ router.post("/result", (req, res) => {
   res.json(monster);
 });
 
-module.exports = router;
+export default router;
