@@ -8,8 +8,12 @@ router.post("/gameStart", (req, res) => {
   const data = req.body.data;
   console.log(data);
 
-  const monster1 = animals.monsters.find((monster) => monster.id == data.id1);
-  const monster2 = animals.monsters.find((monster) => monster.id == data.id2);
+  const monster1 = animals.monsters.find(
+    (monster) => monster.id == data.playerid
+  );
+  const monster2 = animals.monsters.find(
+    (monster) => monster.id == data.computerid
+  );
 
   const monster1Sum =
     monster1.defense + monster1.hp + monster1.speed + monster1.attack;
@@ -29,7 +33,7 @@ router.post("/gameStart", (req, res) => {
 
 router.post("/result", (req, res) => {
   const id = req.body.id;
-  const monster = animals.monsters.find((monster) => monster.id == id);
+  const monster = animals.monsters.find((monster) => monster.id === id);
   res.json(monster);
 });
 
